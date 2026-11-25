@@ -265,29 +265,3 @@ The repository contains entirely synthetic SQL, an analysis script and functiona
 | GitHub profile | https://github.com/Mardoch45 |
 | Project | Mediroza — evidence analysis and penetration testing report |
 | Repository | https://github.com/Mardoch45/INTERSHIP-FINAL-REPORT |
-
-## Repository Usage
-
-```text
-github_mediroza/
-├── README.md
-├── AUTHOR.md
-├── COMMANDS.md
-├── PUBLICATION.md
-├── docs/                       # English PDF, DOCX and Markdown report
-├── evidence/                   # Redacted original screenshots and manifest
-├── data/demo.sql               # Entirely synthetic records
-├── scripts/analyze_demo.py
-└── tests/test_analysis.py
-```
-
-Run from the repository root with Python 3:
-
-```bash
-python3 scripts/analyze_demo.py --source data/demo.sql --output outputs
-python3 -m unittest discover -s tests -v
-```
-
-The script writes two UTF-8, semicolon-delimited CSV files and an English JSON summary to `outputs/`. It uses only the Python standard library and an in-memory SQLite database. Synthetic values differ from the confidential records.
-
-Tests cover complete extraction, totals, source preservation and SQL-escaped apostrophes, including a semicolon inside a quoted string. See [PUBLICATION.md](PUBLICATION.md) to upload this local repository to [Mardoch45/INTERSHIP-FINAL-REPORT](https://github.com/Mardoch45/INTERSHIP-FINAL-REPORT).
