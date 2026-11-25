@@ -1,0 +1,31 @@
+# Sorties locales et fichiers de travail
+outputs/
+__pycache__/
+*.pyc
+.venv/
+*.sqlite
+*.sqlite3
+
+# Ressources confidentielles et listes de mots de passe
+FInal_Project/
+Final_project/
+analyse_M3/
+analyse_m2/
+rapport/
+rapport_final/
+patient_report*
+rockyou*
+*.pot
+*.hash
+*.john
+*.sql
+!data/demo.sql
+*.csv
+
+# Configurations et secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.DS_Store
