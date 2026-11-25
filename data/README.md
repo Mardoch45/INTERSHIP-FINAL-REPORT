@@ -1,8 +1,8 @@
-# Données de démonstration
+# Synthetic Demonstration Data
 
-`demo.sql` est entièrement généré pour ce dépôt : 30 employés et 10 actionnaires fictifs. Aucun nom, salaire individuel, numéro de téléphone, identifiant national ou secret issu des preuves originales n'est repris.
+`demo.sql` contains 30 entirely fictional employees and 10 fictional shareholder organizations. No real name, individual salary, telephone number, national identifier or secret from the confidential evidence is reused.
 
-- `staff` contient un identifiant, un nom fictif, une fonction de démonstration, un département et un salaire mensuel fictif en ZAR.
-- `shareholders` contient un identifiant, une organisation fictive, un pourcentage, un nombre de parts et une classe de démonstration.
+- `staff`: ID, synthetic name, demonstration role, department and fictional monthly salary in ZAR.
+- `shareholders`: ID, synthetic organization, percentage, number of shares and demonstration class.
 
-La ligne 26 contient une apostrophe SQL doublée pour illustrer son interprétation correcte. Les résultats calculés sur ce fichier concernent uniquement cette démonstration.
+Record 26 contains a SQL-escaped apostrophe. Calculated results describe only this synthetic dataset.

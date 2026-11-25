@@ -1,0 +1,65 @@
+[
+  {
+    "id": "whois",
+    "file": "evidence/screenshots/whois_redacted.png",
+    "origin": "Redacted derivative of the trainee VM screenshot",
+    "editing_notes": "Target domain and registry identifier masked; screenshot cropped to its command and initial output.",
+    "sha256": "497be5d3eab4416b126d6af3a0d9a70265f69143c9dcc954681ea7284ba667ff"
+  },
+  {
+    "id": "nslookup",
+    "file": "evidence/screenshots/nslookup_redacted.png",
+    "origin": "Redacted derivative of the trainee VM screenshot",
+    "editing_notes": "Target domain and resolved address masked; repeated commands and desktop area omitted.",
+    "sha256": "4a339812a1e04872786cf4949036a3edbd2777ca954673ce83edbafe3a67a6cd"
+  },
+  {
+    "id": "whatweb",
+    "file": "evidence/screenshots/whatweb_redacted.png",
+    "origin": "Redacted derivative of the trainee VM screenshot",
+    "editing_notes": "Target URLs masked; image cropped before the IP and redirect-address fields.",
+    "sha256": "623d2388a60b0d80fd5825f75e114d6631a1a25ce77c3c7ef9f0a94af3fa2430"
+  },
+  {
+    "id": "dnsrecon",
+    "file": "evidence/screenshots/dnsrecon_redacted.png",
+    "origin": "Redacted derivative of the trainee VM screenshot",
+    "editing_notes": "Only launch and initial status lines retained; target names masked and DNS record output omitted.",
+    "sha256": "4c8cec07e43c29fabd795fd45a120d086d3fdeb9d6614d1c8c1b67d3ce67c807"
+  },
+  {
+    "id": "gobuster",
+    "file": "evidence/screenshots/gobuster_redacted.png",
+    "origin": "Redacted derivative of the trainee VM screenshot",
+    "editing_notes": "Target URL masked in the command and scan configuration; right-hand background and some size fields cropped, with HTTP status results preserved.",
+    "sha256": "d025857cb24caa075c6783458337d44a16d1f6ef6b9d06c9f64e9468b92f25cf"
+  },
+  {
+    "id": "pdf_hash_extraction",
+    "file": "evidence/screenshots/pdf_hash_extraction_redacted.png",
+    "origin": "Redacted derivative of the trainee VM screenshot",
+    "editing_notes": "Cropped to the actual pdf2john command; no password or hash value is shown.",
+    "sha256": "7c06df1a598cf729a4f10c738a90b360bf788f9aa5d3c1b76fefd50e2558a44a"
+  },
+  {
+    "id": "pdf_password_recovery",
+    "file": "evidence/screenshots/pdf_password_recovery_redacted.png",
+    "origin": "Redacted derivative of the trainee VM screenshot",
+    "editing_notes": "Recovered password values masked in both result lists; commands and three-result count preserved.",
+    "sha256": "0a559727e809c10421b2c70e9583b002f52dadafdc04b4414f7b64f8407ffafb"
+  },
+  {
+    "id": "portal_input",
+    "file": "evidence/screenshots/portal_input_redacted.png",
+    "origin": "Redacted derivative of the trainee VM screenshot",
+    "editing_notes": "Cropped to the portal input. This screenshot alone does not prove a successful HTTP response.",
+    "sha256": "5bec7a81e90be0e4c8a66990910abba2b2b12d536cbb9a99bdff7d30d2af2d6d"
+  },
+  {
+    "id": "reports_page",
+    "file": "evidence/screenshots/reports_page_redacted.png",
+    "origin": "Redacted derivative of the trainee VM screenshot",
+    "editing_notes": "Patient names, report references and dates masked; the three download controls remain visible.",
+    "sha256": "96c873d1878135015a9237c6bdde2c5a593fd385003492be3adc5401328e1077"
+  }
+]

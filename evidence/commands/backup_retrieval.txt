@@ -1,0 +1,5 @@
+# Example URL and filenames; no original target address is included.
+curl -q -sS --max-time 30 -D backup_headers.txt -o backup.sql -w 'HTTP status: %{http_code}\n' 'https://mediroza.example/legacy/backup.sql'
+file backup.sql
+head -n 20 backup.sql
+sha256sum backup.sql

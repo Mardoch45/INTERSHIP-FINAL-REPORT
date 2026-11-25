@@ -1,4 +1,4 @@
-# Sorties locales et fichiers de travail
+# Local outputs and working files
 outputs/
 __pycache__/
 *.pyc
@@ -6,7 +6,7 @@ __pycache__/
 *.sqlite
 *.sqlite3
 
-# Ressources confidentielles et listes de mots de passe
+# Confidential evidence and password-recovery inputs
 FInal_Project/
 Final_project/
 analyse_M3/
@@ -20,9 +20,10 @@ rockyou*
 *.john
 *.sql
 !data/demo.sql
+!evidence/commands/local_analysis.sql
 *.csv
 
-# Configurations et secrets
+# Configuration files and secrets
 .env
 .env.*
 !.env.example

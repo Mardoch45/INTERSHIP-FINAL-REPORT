@@ -1,0 +1,5 @@
+# Run only with authorized local documents and your own input files.
+pdf2john patient_report_1.pdf patient_report_2.pdf patient_report_3.pdf > pdfs_hash.hash
+john --format=PDF --wordlist=WORDLIST.txt --pot=results.pot pdfs_hash.hash
+john --show --format=PDF --pot=results.pot pdfs_hash.hash
+exiftool -password 'PDF_PASSWORD' patient_report_3.pdf

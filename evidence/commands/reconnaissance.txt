@@ -1,0 +1,7 @@
+# Redacted command templates. The example domain is not a tested target.
+whois mediroza.example
+nslookup mediroza.example
+whatweb mediroza.example
+dnsrecon -d mediroza.example
+gobuster dir -u https://mediroza.example/ -w ./enumeration.txt
+nmap -sV mediroza.example

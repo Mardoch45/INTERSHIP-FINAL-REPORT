@@ -1,209 +1,293 @@
-# RAPPORT DE TEST D’INTRUSION
+# PENETRATION TESTING REPORT
 
-### Mediroza — Projet de fin de stage — Version publique
+### Mediroza — Final Internship Project — Public Edition
 
-**SEMAINE 4  |  CYBERSECURITY  |  NETWORKWALKS**
+**WEEK 4  |  CYBERSECURITY  |  NETWORKWALKS**
 
-**Rapport formaté :** [PDF](docs/Rapport_Public_Mardochee_BONOU_B084.pdf) | [DOCX modifiable](docs/Rapport_Public_Mardochee_BONOU_B084.docx)
+**Formatted report:** [PDF](docs/Public_Report_Mardochee_BONOU_B084.pdf) | [Editable DOCX](docs/Public_Report_Mardochee_BONOU_B084.docx)
 
-| Champ | Information |
+**Evidence:** [Command reference](COMMANDS.md) | [Screenshot gallery](evidence/README.md)
+
+| Field | Detail |
 |---|---|
 | Pentester | Mardochée BONOU |
-| Programme / Batch | B084 — Networkwalks |
-| Travaux documentés | 22–25 novembre 2026 |
-| Jalons | M1 : accès initial ; M2 : ouverture des PDF ; M3 : analyse de données ; M4 : rapport |
-| Client / cible | Hôpital de démonstration — mediroza.example |
-| Phases couvertes | Reconnaissance, énumération, validation d’impact, analyse des preuves et rapport |
-| Classification | Public — version anonymisée ; données de démonstration |
-| Profil GitHub | https://github.com/Mardoch45 |
+| Program / Batch | B084 — Networkwalks |
+| Documented assessment dates | 22–25 November 2026 |
+| Milestones | M1: initial access; M2: PDF recovery; M3: data analysis; M4: reporting |
+| Client / target | Demonstration hospital — mediroza.example |
+| Phases covered | Reconnaissance, enumeration, impact validation, evidence analysis and reporting |
+| Classification | Public — redacted evidence and synthetic demonstration data |
+| GitHub profile | https://github.com/Mardoch45 |
 
-# 1. Cadre d’autorisation et responsabilité
+# 1. Liability Disclaimer and Authorization
 
-Les activités présentées concernent un projet pédagogique Networkwalks dont le cahier des charges annonce une autorisation écrite. Le périmètre est limité au domaine cible ; l’ingénierie sociale, le déni de service et les tests hors périmètre sont exclus. Les techniques décrites s’appliquent uniquement à des environnements autorisés.
+This assessment was conducted as a Networkwalks educational project whose brief states that written authorization was granted. Testing was limited to the authorized domain. Social engineering, denial of service and out-of-scope testing were excluded. The methods described here apply only to authorized environments.
 
-Cette version de portfolio présente la méthode et les résultats à un niveau anonymisé. Les rapports patients, les noms d’employés et d’actionnaires, les salaires individuels, les identifiants, les mots de passe, les empreintes et les captures originales sont conservés dans le livrable confidentiel. Le domaine .example et le jeu SQL public sont des éléments de démonstration.
+This public edition includes explicitly redacted derivatives of the original VM screenshots. Patient records, employee and shareholder identities, individual salaries, document passwords and original verification hashes remain in the confidential deliverable. The .example domain and the repository SQL dataset are demonstration elements. Redacted screenshots document the original exercise; they are not evidence that commands were run against the example domain.
 
-# 2. Introduction et résumé exécutif
+# 2. Introduction and Executive Summary
 
-Ce rapport documente mon projet de fin de stage, réalisé dans le cadre de la semaine 4 de mon parcours Cybersecurity & Ethical Hacking chez Networkwalks. Il prolonge la reconnaissance par la récupération de documents, l’analyse des protections de PDF et l’examen d’une sauvegarde SQL exposée.
+This report documents my final project during Week 4 of the Networkwalks Cybersecurity & Ethical Hacking internship. It extends reconnaissance into document recovery, examination of PDF protections and analysis of an exposed SQL backup.
 
-Le déroulement suit les quatre jalons : obtenir trois rapports patients, ouvrir les trois PDF, analyser l’exposition des données des employés et des actionnaires, puis rédiger un rapport professionnel avec preuves, impact et recommandations.
+The four milestones were to retrieve three patient reports, recover access to all three encrypted PDFs, identify exposed employee salaries and shareholder details, and produce a professional penetration testing report with evidence, risk analysis and remediation.
 
-L’accès initial par SQLi est confirmé par le stagiaire avec des captures de saisie et de la page des rapports, mais la requête HTTP brute n’est pas conservée. L’ouverture des trois PDF et l’analyse des deux tables du SQL sont vérifiées localement. Le risque global proposé est Élevé pour la confidentialité ; aucune modification de base ni interruption de service n’est démontrée.
+The trainee reports SQL injection as the initial access method and supplied input and report-page screenshots, but the complete HTTP request is not archived. Opening the three original PDFs and extracting the two SQL tables were independently verified locally. The proposed overall risk is High for confidentiality. Database modification and service interruption were not demonstrated.
 
-| Jalon | Résultat | Statut |
+| Milestone | Documented result | Evidence status |
 | --- | --- | --- |
-| M1 | Trois rapports récupérés via le portail patient | Rapporté par le stagiaire ; captures disponibles |
-| M2 | Trois mots de passe retrouvés et contenus lus | Vérifié sur les originaux |
-| M3 | 30 employés et 10 actionnaires dans la sauvegarde | Extraction complète et contrôles réalisés |
-| M4 | Rapport et dossier de portfolio | Préparés pour relecture |
+| M1 | Three patient reports retrieved | Reported by the trainee; supporting screenshots available |
+| M2 | Three passwords recovered and documents opened | Verified against the original files |
+| M3 | 30 employees and 10 shareholders extracted | Complete extraction and consistency checks |
+| M4 | Report, command reference and evidence gallery | Prepared for review |
 
-# 3. Périmètre et méthodologie
+# 3. Scope and Methodology
 
-Participant : Mardochée BONOU, Batch B084. Le sujet fourni porte la référence B083, tandis que mon identité de participant est B084, confirmée pour ce rapport. La durée prévue dans le sujet est de cinq jours ; les preuves disponibles documentent des travaux du 22 au 25 novembre 2026.
+Participant: Mardochée BONOU, Batch B084. The supplied project brief bears reference B083; the participant confirmed B084 as the correct personal batch. The brief allows five days, while the available evidence documents work from 22 to 25 November 2026.
 
-La méthode comprend WHOIS, résolution DNS, identification web, énumération de chemins, analyse du portail, récupération des PDF, essais de mots de passe hors ligne, lecture des métadonnées puis analyse locale du SQL. Les parties d’analyse et de préparation des documents ont été réalisées avec une assistance technique ; les sources et les limites sont distinguées des interprétations.
+The workflow included WHOIS, DNS resolution, web fingerprinting, path enumeration, portal examination, PDF retrieval, offline password testing, metadata examination and local SQL analysis. Technical assistance was used for data analysis and document preparation. Source observations are distinguished from interpretations and evidence limitations.
 
-Les contrôles portent sur les trois PDF et sur tous les enregistrements des deux tables du fichier fourni. Les preuves réseau ont été réalisées par le stagiaire ; elles n’ont pas été rejouées pour préparer ce document. Une adresse IP d’hébergement, un port ouvert ou un nom de technologie ne constitue pas à lui seul une vulnérabilité.
+All records in the supplied staff and shareholders tables were analyzed. The network evidence was collected by the trainee and was not replayed when building this report. An open port, public address or identified technology is not by itself an exploitable vulnerability.
 
-# 4. Outils utilisés
+# 4. Tools Used
 
-| Outil | Rôle |
+| Tool | Purpose |
 | --- | --- |
-| Kali Linux | Environnement de travail utilisé dans la VM du stagiaire |
-| WHOIS, nslookup et DNSRecon | Reconnaissance des informations de domaine et des enregistrements DNS |
-| WhatWeb, Gobuster et Nmap | Identification web, énumération des chemins et repérage des services |
-| Client FTP | Compréhension du service et d’une tentative d’authentification refusée |
-| pdf2john et John the Ripper | Extraction des données de vérification et essais de mots de passe locaux |
-| ExifTool et Poppler | Ouverture, lecture du texte et examen des métadonnées originales |
-| curl | Conservation de la réponse HTTP et du contenu de la sauvegarde |
-| Python et SQLite | Extraction structurée, agrégations, rapprochements et contrôles d’intégrité |
+| Kali Linux | Trainee VM environment |
+| WHOIS, nslookup and DNSRecon | Domain and DNS reconnaissance |
+| WhatWeb, Gobuster and Nmap | Web fingerprinting, path enumeration and service discovery |
+| FTP client | Understanding service connectivity and rejected authentication |
+| pdf2john and John the Ripper | Extracting verification data and offline password recovery |
+| ExifTool and Poppler | Opening original PDFs, extracting text and inspecting metadata |
+| curl | Preserving the backup response headers and file |
+| Python and SQLite | Structured extraction, aggregation, joins and integrity checks |
 
-# 5. Activités réalisées et résultats
+# 5. Activities Performed and Results
 
-## 5.1 Reconnaissance et énumération
+## 5.1 Reconnaissance and Enumeration
 
 ```text
 whois mediroza.example
 nslookup mediroza.example
 whatweb mediroza.example
 dnsrecon -d mediroza.example
+gobuster dir -u https://mediroza.example/ -w ./enumeration.txt
+nmap -sV mediroza.example
 ```
 
-Les commandes ci-dessus illustrent la démarche avec un domaine réservé. Les adresses réelles, les journaux DNS et les captures d’infrastructure sont retirés de la version publique. Les outils de reconnaissance ont servi à cartographier le contexte, pas à attribuer une vulnérabilité à chaque service découvert.
+These are command templates using a reserved example domain. The evidence gallery contains redacted original screenshots, with target names and addresses masked. The original results established the context; they were not treated as proof that every exposed service was vulnerable.
 
-La tentative FTP anonyme a été refusée. Le code 331 demandait la poursuite de l’authentification ; le code 530 indiquait le refus. Aucun accès FTP réussi n’est revendiqué. Les résultats DNS et les variations de réponses HTTP restent des observations dont la cause n’est pas extrapolée.
+Anonymous FTP authentication was rejected. Reply 331 requested the next authentication step; reply 530 indicated rejection. No successful FTP login is claimed. DNS results and varying HTTP responses are contextual observations whose causes were not extrapolated.
 
-## 5.2 M1 — Accès initial aux rapports
+## 5.2 M1 — Initial Access to Reports
 
-Le stagiaire rapporte avoir utilisé une valeur d’injection dans le champ Username du portail patient et obtenu les liens des trois rapports. La capture de saisie et celle de la page des rapports sont disponibles dans le dossier confidentiel. La route exacte, les paramètres complets et la réponse HTTP après soumission ne sont pas archivés.
-
-Dans une requête vulnérable construite par concaténation, une apostrophe peut terminer une chaîne et un commentaire SQL peut neutraliser une condition placée ensuite. Ce mécanisme explique l’hypothèse de contournement ; il ne représente pas du code serveur récupéré. Un accès administratif complet, une écriture dans la base et une compromission du système ne sont pas démontrés.
-
-## 5.3 M2 — Ouverture des PDF
-
-Les trois documents utilisent le gestionnaire PDF Standard, révision 3, avec RC4 et une clé de 128 bits. Les mots de passe ont été retrouvés par dictionnaire, puis chaque original a été réellement ouvert et son texte extrait. Le test démontre la faiblesse des mots de passe utilisés, et non une récupération directe de la clé indépendante du secret.
-
-Les mots de passe et leurs empreintes ne sont pas publiés. La méthode consiste à extraire les données de vérification de chaque PDF, sélectionner un dictionnaire pertinent, lancer les essais hors ligne puis vérifier l’ouverture réelle. Les protections du portail ne limitent pas des essais effectués sur un fichier déjà téléchargé.
-
-## 5.4 Métadonnées et piste vers la sauvegarde
-
-Les métadonnées utiles étaient chiffrées avec le document. Sans mot de passe, ExifTool signalait que le PDF était protégé. Après ouverture, un commentaire opérationnel indiquait un répertoire historique de sauvegarde. Les copies réexportées permettent de lire le rapport, mais perdent ces champs ; les originaux restent la référence pour leur analyse.
-
-## 5.5 M3 — Récupération et analyse du SQL
-
-Le fichier contient les tables staff et shareholders. CREATE TABLE décrit les colonnes ; INSERT INTO indique l’ordre des valeurs. L’analyse importe uniquement ces blocs dans SQLite local, sans exécuter les commandes MySQL SET, DROP ou LOCK et sans se connecter à la base du serveur.
-
-Dans staff, monthly_salary_zar désigne le salaire mensuel en rands sud-africains. Dans shareholders, share_percent et shares_held indiquent le pourcentage de participation et le nombre de parts. COUNT, SUM et JOIN permettent de vérifier les effectifs, les totaux et les correspondances entre les tables.
-
-| Résultat de l’audit | Présentation publique |
-| --- | --- |
-| 30 employés et 10 actionnaires | Effectifs publiés sans identité individuelle |
-| Salaires et participations | Valeurs réelles conservées dans le rapport confidentiel |
-| Contrôles de cohérence | Totaux, nombres de lignes et correspondances vérifiés |
-| Jeu SQL du dépôt | 30 employés et 10 actionnaires entièrement fictifs |
-
-Un refus de liste du répertoire n’établit pas que ses fichiers sont protégés. L’énumération a reçu 403 sur le répertoire historique, tandis que la récupération directe du fichier a renvoyé 200. La vulnérabilité est l’exposition HTTP d’une sauvegarde interne ; son contenu sert à démontrer l’impact.
-
-## 5.6 Cohérence et limites des données
-
-L’en-tête du dump annonce le 27 août 2019, mais trois dates d’embauche lui sont postérieures. Cette incohérence empêche d’attribuer une période fiable aux montants. Le champ HTTP Last-Modified ne date pas les salaires. Le rapport décrit les enregistrements du fichier, sans garantir leur actualité ni l’effectif actuel de l’hôpital.
-
-# 6. Analyse des risques et impact
-
-| ID | Constat | Preuve / observation | Impact | Niveau |
-| --- | --- | --- | --- | --- |
-| F-01 | SQLi du portail rapportée | Valeur confirmée et captures ; requête brute absente | Accès rapporté aux documents médicaux | Élevé, provisoire |
-| F-02 | Mots de passe PDF prévisibles | Trois ouvertures vérifiées après essais locaux | Lecture de documents confidentiels | Élevé |
-| F-03 | Informations internes dans les métadonnées | Commentaire opérationnel lu sur un original | Orientation vers une sauvegarde | Faible |
-| F-04 | Sauvegarde SQL exposée | Réponse 200 et contenu identique ; session absente selon le test du stagiaire | Divulgation de données personnelles et financières | Élevé |
-
-Les niveaux sont qualitatifs. Ils évaluent l’impact démontré sur la confidentialité et les conditions d’accès disponibles dans les preuves. Aucun score CVSS ni privilège supplémentaire n’est inventé. L’absence de contrôle d’accès au fichier est distincte d’une simple exposition d’en-têtes, d’adresses publiques ou de ports attendus.
-
-## 6.1 Contrôles et observations à interpréter avec prudence
-
-La redirection vers HTTPS et le refus d’authentification FTP anonyme sont des contrôles observés. Ils ne compensent pas la divulgation de la sauvegarde ou la faiblesse des mots de passe des PDF. Une réponse 403 de répertoire, une absence de réponse DNSSEC ou une identification de technologie ne sont pas automatiquement des vulnérabilités exploitables.
-
-# 7. Recommandations
-
-| Priorité | Action | Validation attendue |
-| --- | --- | --- |
-| 1 | Retirer les sauvegardes des répertoires servis par le site et restreindre leur stockage | L’URL du fichier ne délivre plus le SQL sans autorisation |
-| 1 | Paramétrer les requêtes d’authentification et contrôler l’accès à chaque rapport | La tentative d’injection est refusée et les documents d’autres comptes sont inaccessibles |
-| 2 | Remplacer les secrets prévisibles par des secrets longs, aléatoires et propres à chaque PDF | Les anciens secrets ne fonctionnent plus sur les documents réémis |
-| 2 | Supprimer les commentaires opérationnels et chemins internes des métadonnées distribuées | Les nouveaux originaux ne divulguent plus la piste de sauvegarde |
-| 2 | Examiner les journaux et rechercher les autres sauvegardes déployées | L’étendue de l’exposition et les copies similaires sont vérifiées |
-| 3 | Vérifier la provenance et la période de validité des données | Les dates, versions et responsabilités sont documentées |
-
-# 8. Conclusion et bilan personnel
-
-Le projet relie la reconnaissance à l’analyse d’impact : des documents récupérés peuvent révéler une piste dans leurs métadonnées, puis une sauvegarde accessible peut exposer des données structurées sans accès à la base du serveur. Les résultats M2 et M3 sont vérifiés ; la preuve HTTP de M1 reste à renforcer si une capture complète est disponible.
-
-## 8.1 Compétences travaillées
-
-J’ai travaillé sur la distinction entre la connexion à un service et une authentification réussie. Une réponse FTP 331 ne suffit pas à prouver qu’un compte est valide ou qu’une session est ouverte.
-
-J’ai approfondi la récupération de mots de passe de PDF : l’extraction des données de vérification, le choix du dictionnaire et la vérification de l’ouverture réelle sont trois étapes distinctes.
-
-J’ai appris à examiner les métadonnées des documents originaux avec leur mot de passe. Une copie réexportée peut conserver le contenu visible tout en perdant les commentaires internes utiles à l’analyse.
-
-J’ai étudié la lecture d’une sauvegarde SQL en faisant correspondre les colonnes aux valeurs, puis en utilisant SELECT, COUNT, SUM et JOIN pour produire des tableaux et vérifier les résultats.
-
-Ce projet m’a amené à distinguer une observation de reconnaissance d’une vulnérabilité démontrée, à conserver les preuves et à préparer une version de portfolio adaptée à une publication publique.
-
-Le rapport suit la structure du modèle Pentesting-Report-Sample : cadre d’autorisation, introduction, périmètre, outils, activités, risques, recommandations, conclusion et preuves. Le résumé exécutif et les annexes de données répondent en complément aux exigences du sujet de la semaine 4.
-
-# 9. Preuves collectées
-
-Les captures originales et annexes confidentielles sont exclues de ce document. L’illustration suivante explique la chaîne de travail sans montrer de dossier patient, d’identité individuelle, de secret ou d’adresse réelle.
-
-![Schéma pédagogique de la démarche ; aucune capture de la cible réelle.](<docs/illustrations/demarche.png>)
-
-Schéma pédagogique de la démarche ; aucune capture de la cible réelle.
-
-## 9.1 Reproduire l’analyse avec des données fictives
+The trainee confirms entering a SQL injection value in the patient portal Username field and obtaining the report links. An input screenshot and a subsequent report-page screenshot are available. The exact form route, complete request parameters and successful HTTP response are not archived.
 
 ```text
-python3 scripts/analyser_demo.py --source data/demo.sql --output outputs
+Confirmed Username input: admin' -- -
+```
+
+In a vulnerable query assembled by string concatenation, an apostrophe may terminate a string and a SQL comment may suppress a following condition. This explains the reported bypass mechanism; it is not recovered server source code. Administrative server control, database writes and operating-system compromise were not demonstrated.
+
+## 5.3 M2 — PDF Password Recovery
+
+The three documents use the PDF Standard security handler, revision 3, with RC4 and a 128-bit key. Passwords were recovered by wordlist testing, then each original was opened and its text extracted. This demonstrates predictable passwords, not direct key recovery independently of the password.
+
+```text
+pdf2john patient_report_1.pdf patient_report_2.pdf patient_report_3.pdf > pdfs_hash.hash
+john --format=PDF --wordlist=WORDLIST.txt --pot=results.pot pdfs_hash.hash
+john --show --format=PDF --pot=results.pot pdfs_hash.hash
+```
+
+Recovered values and verification hashes are withheld in this edition. The original command screenshot retains the three-result count while masking both password lists. Public command files explain the syntax; confidential inputs and wordlists are not bundled in the repository.
+
+## 5.4 Metadata and the Backup Clue
+
+```text
+exiftool -password 'PDF_PASSWORD' patient_report_3.pdf
+```
+
+The useful metadata was encrypted with the PDF. Without a password, ExifTool reported a protected document. Opening the original revealed an operational comment pointing to a legacy backup directory. Re-exported copies retained the visible content but lost those metadata fields, so the original PDFs remained the evidence source.
+
+## 5.5 M3 — SQL Retrieval and Data Analysis
+
+```text
+curl -q -sS -D backup_headers.txt -o backup.sql \
+  'https://mediroza.example/legacy/backup.sql'
+
+file backup.sql
+head -n 20 backup.sql
+```
+
+The URL above is a redacted template, not the original target address. The trainee preserved an HTTP 200 response and a SQL verification copy matching the original download. The original request headers were not archived.
+
+The backup contains staff and shareholders tables. CREATE TABLE defines columns; INSERT INTO specifies the value order. Only the two INSERT blocks were imported into local SQLite. MySQL SET, DROP and LOCK instructions were not executed, and no connection to the server database was required.
+
+```text
+SELECT full_name, job_title, department, monthly_salary_zar
+FROM staff ORDER BY id;
+
+SELECT shareholder_name, share_percent, shares_held, share_class
+FROM shareholders ORDER BY id;
+```
+
+monthly_salary_zar means a monthly amount in South African rand. share_percent and shares_held mean the ownership percentage and number of shares. COUNT, SUM and JOIN support validation of row counts, totals and name matches.
+
+| Audit result | Public presentation |
+| --- | --- |
+| 30 employees and 10 shareholders | Counts without individual identities |
+| Salaries and ownership records | Real values retained in the confidential report |
+| Consistency checks | Row counts, totals and name matches checked |
+| Repository SQL dataset | 30 entirely fictional employees and 10 fictional shareholders |
+
+A rejected directory listing does not establish that individual files are protected. Enumeration returned 403 for the legacy directory while the direct file request returned 200. The finding is web exposure of an internal backup; its contents demonstrate the impact.
+
+## 5.6 Data Consistency and Limitations
+
+The SQL header declares 27 August 2019, but three employment dates are later. This prevents assigning a reliable validity period to the salary amounts. HTTP Last-Modified dates the served file, not the salaries. The report describes the supplied records without claiming current salaries or the current hospital workforce.
+
+# 6. Security Findings and Risk Analysis
+
+| ID | Finding | Evidence / observation | Impact | Risk |
+| --- | --- | --- | --- | --- |
+| F-01 | Reported portal SQLi | Confirmed input and screenshots; raw request unavailable | Reported access to medical documents | High, provisional |
+| F-02 | Predictable PDF passwords | Three originals opened after offline recovery | Disclosure of confidential reports | High |
+| F-03 | Operational PDF metadata | Comment recovered from an original document | Discovery of a backup location | Low |
+| F-04 | Exposed SQL backup | HTTP 200 and identical file; session-free request reported by trainee | Personal and financial data disclosure | High |
+
+Ratings are qualitative and based on demonstrated confidentiality impact and documented access conditions. No CVSS score or additional privilege is invented. Lack of file access control is distinct from expected public headers, addresses or reachable ports.
+
+## 6.1 Positive Controls and Cautious Interpretation
+
+HTTPS redirection and rejection of anonymous FTP authentication were observed. They do not compensate for an exposed backup or predictable PDF passwords. A directory 403 response, missing DNSSEC answer or technology fingerprint is not automatically an exploitable vulnerability.
+
+# 7. Recommendations
+
+| Priority | Action | Retest criterion |
+| --- | --- | --- |
+| 1 | Remove backups from web-served directories and restrict storage access | The direct backup URL no longer returns SQL without authorization |
+| 1 | Parameterize authentication queries and authorize each report download | The injection input is rejected and other accounts’ documents are inaccessible |
+| 2 | Replace predictable document secrets with long, random, unique passwords | Recovered passwords no longer open reissued documents |
+| 2 | Remove operational comments and internal paths from distributed metadata | New originals do not reveal the backup clue |
+| 2 | Review access logs and search for other deployed backup copies | Exposure scope and similar files are documented |
+| 3 | Validate backup provenance and data validity periods | Dates, versions and ownership are documented |
+
+# 8. Conclusion and Personal Reflection
+
+The exercise connects reconnaissance to impact analysis: recovered documents can reveal a metadata clue, and an accessible backup can disclose structured records without direct database access. M2 and M3 results were checked. A complete HTTP capture would strengthen the M1 evidence if one becomes available.
+
+## 8.1 Skills Practiced
+
+I worked on the distinction between reaching a service and successfully authenticating. An FTP 331 response does not establish that an account is valid or that a session is authenticated.
+
+I developed my understanding of PDF password recovery: extracting verification data, selecting a wordlist and checking that the recovered password opens the original document are separate steps.
+
+I learned to inspect original PDF metadata using the document password. A re-exported copy may preserve the visible report while losing operational comments that matter to the investigation.
+
+I studied SQL backups by matching column names to row values, then using SELECT, COUNT, SUM and JOIN to produce readable tables and validate the results.
+
+This project helped me distinguish reconnaissance observations from demonstrated vulnerabilities, retain supporting evidence and prepare a public portfolio version that protects confidential records.
+
+The report follows the supplied sample: liability disclaimer, introduction, scope, tools, activities, risk analysis, recommendations, conclusion and evidence. The executive summary and full confidential data annexes also satisfy the Week 4 project brief.
+
+# 9. Evidence Collected
+
+The gallery pairs command syntax with screenshot evidence. Public images are edited derivatives of the original trainee screenshots, not reconstructed successful executions. Target addresses, recovered secrets and patient details are masked where applicable. Crops and redactions are documented in the evidence manifest.
+
+## 9.1 WHOIS
+
+![Domain registration reconnaissance — redacted original VM screenshot; see evidence manifest.](<evidence/screenshots/whois_redacted.png>)
+
+Domain registration reconnaissance — redacted original VM screenshot; see evidence manifest.
+
+## 9.2 WhatWeb
+
+![Web fingerprinting and HTTP responses — redacted original VM screenshot; see evidence manifest.](<evidence/screenshots/whatweb_redacted.png>)
+
+Web fingerprinting and HTTP responses — redacted original VM screenshot; see evidence manifest.
+
+## 9.3 nslookup
+
+![Domain resolution — redacted original VM screenshot; see evidence manifest.](<evidence/screenshots/nslookup_redacted.png>)
+
+Domain resolution — redacted original VM screenshot; see evidence manifest.
+
+## 9.4 DNSRecon
+
+![DNS enumeration launch — redacted original VM screenshot; see evidence manifest.](<evidence/screenshots/dnsrecon_redacted.png>)
+
+DNS enumeration launch — redacted original VM screenshot; see evidence manifest.
+
+## 9.5 Gobuster
+
+![Path enumeration and directory status codes — redacted original VM screenshot; see evidence manifest.](<evidence/screenshots/gobuster_redacted.png>)
+
+Path enumeration and directory status codes — redacted original VM screenshot; see evidence manifest.
+
+## 9.6 PDF Verification Data Extraction
+
+![Actual pdf2john command — redacted original VM screenshot; see evidence manifest.](<evidence/screenshots/pdf_hash_extraction_redacted.png>)
+
+Actual pdf2john command — redacted original VM screenshot; see evidence manifest.
+
+## 9.7 PDF Password Recovery
+
+![Actual John commands and three-result count — redacted original VM screenshot; see evidence manifest.](<evidence/screenshots/pdf_password_recovery_redacted.png>)
+
+Actual John commands and three-result count — redacted original VM screenshot; see evidence manifest.
+
+## 9.8 Portal Input
+
+![Input capture; not proof of the successful HTTP response — redacted original VM screenshot; see evidence manifest.](<evidence/screenshots/portal_input_redacted.png>)
+
+Input capture; not proof of the successful HTTP response — redacted original VM screenshot; see evidence manifest.
+
+## 9.9 Report Download Page
+
+![Three report download controls — redacted original VM screenshot; see evidence manifest.](<evidence/screenshots/reports_page_redacted.png>)
+
+Three report download controls — redacted original VM screenshot; see evidence manifest.
+
+## 9.10 Reproduce the Data Analysis with Synthetic Records
+
+```text
+python3 scripts/analyze_demo.py --source data/demo.sql --output outputs
 python3 -m unittest discover -s tests -v
 ```
 
-Le dépôt contient un export SQL entièrement fictif, le script d’analyse et des tests fonctionnels. Les résultats produits à partir de ce jeu sont des résultats de démonstration ; ils ne correspondent pas aux montants et identités du rapport confidentiel.
+The repository contains entirely synthetic SQL, an analysis script and functional tests. Results produced from that dataset are demonstration results and do not reproduce the confidential amounts or identities. See COMMANDS.md for the command reference and evidence/manifest.json for editing notes.
 
-# Informations sur l’auteur et le projet
+# Author and Project Information
 
-| Champ | Information |
+| Field | Detail |
 | --- | --- |
-| Auteur | Mardochée BONOU |
-| Programme | Networkwalks Cybersecurity Internship — Semaine 4 — Batch B084 |
-| Profil GitHub | https://github.com/Mardoch45 |
-| Projet | Mediroza — analyse de preuves et rapport de pentest |
-| Dépôt GitHub | https://github.com/Mardoch45/INTERSHIP-FINAL-REPORT |
+| Author | Mardochée BONOU |
+| Program | Networkwalks Cybersecurity Internship — Week 4 — Batch B084 |
+| GitHub profile | https://github.com/Mardoch45 |
+| Project | Mediroza — evidence analysis and penetration testing report |
+| Repository | https://github.com/Mardoch45/INTERSHIP-FINAL-REPORT |
 
-## Utiliser le dépôt
-
-Le rapport suit la structure du modèle personnel de la semaine 2, adaptée aux jalons M1–M4 de la semaine 4. Les documents publiables sont dans `docs/`.
+## Repository Usage
 
 ```text
 github_mediroza/
 ├── README.md
-├── AUTEUR.md
+├── AUTHOR.md
+├── COMMANDS.md
 ├── PUBLICATION.md
-├── docs/                  # Rapport public en PDF, DOCX et Markdown
-├── data/demo.sql          # Export entièrement fictif
-├── scripts/analyser_demo.py
-└── tests/test_analyse.py
+├── docs/                       # English PDF, DOCX and Markdown report
+├── evidence/                   # Redacted original screenshots and manifest
+├── data/demo.sql               # Entirely synthetic records
+├── scripts/analyze_demo.py
+└── tests/test_analysis.py
 ```
 
-Depuis la racine du dépôt, avec Python 3 :
+Run from the repository root with Python 3:
 
 ```bash
-python3 scripts/analyser_demo.py --source data/demo.sql --output outputs
+python3 scripts/analyze_demo.py --source data/demo.sql --output outputs
 python3 -m unittest discover -s tests -v
 ```
 
-Le script produit deux CSV et une synthèse JSON dans `outputs/`. Il utilise uniquement la bibliothèque standard Python et une base SQLite en mémoire. Les CSV utilisent UTF-8 et le séparateur point-virgule. Les valeurs du jeu de démonstration sont inventées et diffèrent des données confidentielles.
+The script writes two UTF-8, semicolon-delimited CSV files and an English JSON summary to `outputs/`. It uses only the Python standard library and an in-memory SQLite database. Synthetic values differ from the confidential records.
 
-Les tests vérifient l'extraction complète, les totaux, la conservation du fichier source et l'interprétation des apostrophes SQL, y compris un point-virgule dans une chaîne.
-
-Voir [PUBLICATION.md](PUBLICATION.md) pour envoyer cette copie locale vers le dépôt GitHub indiqué : [Mardoch45/INTERSHIP-FINAL-REPORT](https://github.com/Mardoch45/INTERSHIP-FINAL-REPORT).
+Tests cover complete extraction, totals, source preservation and SQL-escaped apostrophes, including a semicolon inside a quoted string. See [PUBLICATION.md](PUBLICATION.md) to upload this local repository to [Mardoch45/INTERSHIP-FINAL-REPORT](https://github.com/Mardoch45/INTERSHIP-FINAL-REPORT).
