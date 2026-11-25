@@ -176,4 +176,4 @@ Le dépôt contient un export SQL entièrement fictif, le script d’analyse et 
 | Programme | Networkwalks Cybersecurity Internship — Semaine 4 — Batch B084 |
 | Profil GitHub | https://github.com/Mardoch45 |
 | Projet | Mediroza — analyse de preuves et rapport de pentest |
-| Dépôt prévu | Mardoch45/Networkwalks-Mediroza-Pentest — préparé localement, publication ultérieure |
+| Dépôt GitHub | https://github.com/Mardoch45/INTERSHIP-FINAL-REPORT |

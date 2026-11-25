@@ -178,7 +178,7 @@ Le dépôt contient un export SQL entièrement fictif, le script d’analyse et 
 | Programme | Networkwalks Cybersecurity Internship — Semaine 4 — Batch B084 |
 | Profil GitHub | https://github.com/Mardoch45 |
 | Projet | Mediroza — analyse de preuves et rapport de pentest |
-| Dépôt prévu | Mardoch45/Networkwalks-Mediroza-Pentest — préparé localement, publication ultérieure |
+| Dépôt GitHub | https://github.com/Mardoch45/INTERSHIP-FINAL-REPORT |
 
 ## Utiliser le dépôt
 
@@ -206,4 +206,4 @@ Le script produit deux CSV et une synthèse JSON dans `outputs/`. Il utilise uni
 
 Les tests vérifient l'extraction complète, les totaux, la conservation du fichier source et l'interprétation des apostrophes SQL, y compris un point-virgule dans une chaîne.
 
-Voir [PUBLICATION.md](PUBLICATION.md) pour créer le dépôt GitHub à partir de cette copie locale. Le nom proposé est `Mardoch45/Networkwalks-Mediroza-Pentest`.
+Voir [PUBLICATION.md](PUBLICATION.md) pour envoyer cette copie locale vers le dépôt GitHub indiqué : [Mardoch45/INTERSHIP-FINAL-REPORT](https://github.com/Mardoch45/INTERSHIP-FINAL-REPORT).
