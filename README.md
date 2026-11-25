@@ -6,7 +6,7 @@
 
 **Formatted report:** [PDF](docs/Public_Report_Mardochee_BONOU_B084.pdf) | [Editable DOCX](docs/Public_Report_Mardochee_BONOU_B084.docx)
 
-**Evidence:** [Command reference](COMMANDS.md) | [Screenshot gallery](evidence/README.md)
+**Evidence:** [Detailed command reference](#command-reference) | [Screenshot gallery](#screenshot-gallery)
 
 | Field | Detail |
 |---|---|
@@ -18,6 +18,22 @@
 | Phases covered | Reconnaissance, enumeration, impact validation, evidence analysis and reporting |
 | Classification | Public — redacted evidence and synthetic demonstration data |
 | GitHub profile | https://github.com/Mardoch45 |
+
+## Contents
+
+- [1. Liability Disclaimer and Authorization](#1-liability-disclaimer-and-authorization)
+- [2. Introduction and Executive Summary](#2-introduction-and-executive-summary)
+- [3. Scope and Methodology](#3-scope-and-methodology)
+- [4. Tools Used](#4-tools-used)
+- [5. Activities Performed and Results](#5-activities-performed-and-results)
+- [6. Security Findings and Risk Analysis](#6-security-findings-and-risk-analysis)
+- [7. Recommendations](#7-recommendations)
+- [8. Conclusion and Personal Reflection](#8-conclusion-and-personal-reflection)
+- [9. Evidence Collected](#screenshot-gallery)
+- [9.10 Author and Project Information](#author-and-project-information)
+- [Appendix A: Detailed Command Reference](#command-reference)
+- [Appendix B: Synthetic Data and Local Analysis](#synthetic-data)
+- [Appendix C: Repository Layout and Publishing](#publishing)
 
 # 1. Liability Disclaimer and Authorization
 
@@ -189,6 +205,8 @@ This project helped me distinguish reconnaissance observations from demonstrated
 
 The report follows the supplied sample: liability disclaimer, introduction, scope, tools, activities, risk analysis, recommendations, conclusion and evidence. The executive summary and full confidential data annexes also satisfy the Week 4 project brief.
 
+<a id="screenshot-gallery"></a>
+
 # 9. Evidence Collected
 
 The gallery pairs command syntax with screenshot evidence. Public images are edited derivatives of the original trainee screenshots, not reconstructed successful executions. Target addresses, recovered secrets and patient details are masked where applicable. Crops and redactions are documented in the evidence manifest.
@@ -199,11 +217,15 @@ The gallery pairs command syntax with screenshot evidence. Public images are edi
 
 Domain registration reconnaissance — redacted original VM screenshot; see evidence manifest.
 
+**Editing notes:** Target domain and registry identifier masked; screenshot cropped to its command and initial output.
+
 ## 9.2 WhatWeb
 
 ![Web fingerprinting and HTTP responses — redacted original VM screenshot; see evidence manifest.](<evidence/screenshots/whatweb_redacted.png>)
 
 Web fingerprinting and HTTP responses — redacted original VM screenshot; see evidence manifest.
+
+**Editing notes:** Target URLs masked; image cropped before the IP and redirect-address fields.
 
 ## 9.3 nslookup
 
@@ -211,11 +233,15 @@ Web fingerprinting and HTTP responses — redacted original VM screenshot; see e
 
 Domain resolution — redacted original VM screenshot; see evidence manifest.
 
+**Editing notes:** Target domain and resolved address masked; repeated commands and desktop area omitted.
+
 ## 9.4 DNSRecon
 
 ![DNS enumeration launch — redacted original VM screenshot; see evidence manifest.](<evidence/screenshots/dnsrecon_redacted.png>)
 
 DNS enumeration launch — redacted original VM screenshot; see evidence manifest.
+
+**Editing notes:** Only launch and initial status lines retained; target names masked and DNS record output omitted.
 
 ## 9.5 Gobuster
 
@@ -223,11 +249,15 @@ DNS enumeration launch — redacted original VM screenshot; see evidence manifes
 
 Path enumeration and directory status codes — redacted original VM screenshot; see evidence manifest.
 
+**Editing notes:** Target URL masked in the command and scan configuration; right-hand background and some size fields cropped, with HTTP status results preserved.
+
 ## 9.6 PDF Verification Data Extraction
 
 ![Actual pdf2john command — redacted original VM screenshot; see evidence manifest.](<evidence/screenshots/pdf_hash_extraction_redacted.png>)
 
 Actual pdf2john command — redacted original VM screenshot; see evidence manifest.
+
+**Editing notes:** Cropped to the actual pdf2john command; no password or hash value is shown.
 
 ## 9.7 PDF Password Recovery
 
@@ -235,17 +265,25 @@ Actual pdf2john command — redacted original VM screenshot; see evidence manife
 
 Actual John commands and three-result count — redacted original VM screenshot; see evidence manifest.
 
+**Editing notes:** Recovered password values masked in both result lists; commands and three-result count preserved.
+
 ## 9.8 Portal Input
 
 ![Input capture; not proof of the successful HTTP response — redacted original VM screenshot; see evidence manifest.](<evidence/screenshots/portal_input_redacted.png>)
 
 Input capture; not proof of the successful HTTP response — redacted original VM screenshot; see evidence manifest.
 
+**Editing notes:** Cropped to the portal input. This screenshot alone does not prove a successful HTTP response.
+
 ## 9.9 Report Download Page
 
 ![Three report download controls — redacted original VM screenshot; see evidence manifest.](<evidence/screenshots/reports_page_redacted.png>)
 
 Three report download controls — redacted original VM screenshot; see evidence manifest.
+
+**Editing notes:** Patient names, report references and dates masked; the three download controls remain visible.
+
+<a id="author-and-project-information"></a>
 
 ## 9.10  Author and Project Information
 
@@ -256,3 +294,285 @@ Three report download controls — redacted original VM screenshot; see evidence
 | GitHub profile | https://github.com/Mardoch45 |
 | Project | Mediroza — evidence analysis and penetration testing report |
 | Repository | https://github.com/Mardoch45/INTERSHIP-FINAL-REPORT |
+
+This project presents my reconnaissance, PDF protection analysis, SQL data interpretation and penetration testing reporting work. The report includes an editable reflection on the skills practiced.
+
+The public edition includes redacted original screenshots and synthetic demonstration data. Confidential records remain in the instructor deliverable.
+
+<a id="command-reference"></a>
+
+# Appendix A — Detailed Command Reference
+
+This reference pairs command syntax with original screenshot evidence. Target addresses in templates use the reserved `mediroza.example` domain. `WORDLIST.txt` and `PDF_PASSWORD` are placeholders. The screenshots are explicitly redacted derivatives of the original VM captures; no command was re-run against the example domain.
+
+## A.1 Domain Registration — WHOIS
+
+```bash
+whois mediroza.example
+```
+
+Purpose: inspect domain registration and authoritative name-server information.
+
+
+## A.2 Web Fingerprinting — WhatWeb
+
+```bash
+whatweb mediroza.example
+```
+
+Purpose: inspect identified web technologies, status codes and redirects. A fingerprint is an observation, not proof of a vulnerability.
+
+
+## A.3 Domain Resolution — nslookup
+
+```bash
+nslookup mediroza.example
+```
+
+Purpose: resolve the domain. The target name and resolved IP are masked in the screenshot.
+
+
+## A.4 DNS Enumeration — DNSRecon
+
+```bash
+dnsrecon -d mediroza.example
+```
+
+Purpose: examine DNS records. The public image retains the launch and initial status lines; the full original record output remains in the confidential report.
+
+
+## A.5 Path Enumeration — Gobuster
+
+```bash
+gobuster dir -u https://mediroza.example/ -w ./enumeration.txt
+```
+
+`dir` selects directory enumeration; `-u` selects the authorized URL; `-w` supplies candidate paths. A directory returning 403 does not establish protection of every file inside it.
+
+
+## A.6 Service Identification — Nmap
+
+```bash
+nmap -sV mediroza.example
+```
+
+`-sV` probes open ports for service information. The trainee supplied textual scan output, but no original Nmap screenshot was available. An open port is not a vulnerability by itself.
+
+## A.7 PDF Verification Data Extraction
+
+```bash
+pdf2john patient_report_1.pdf patient_report_2.pdf patient_report_3.pdf > pdfs_hash.hash
+```
+
+This extracts the verification data needed to test candidate passwords. It does not decrypt a PDF by itself.
+
+
+## A.8 Offline Password Recovery — John the Ripper
+
+```bash
+john --format=PDF --wordlist=WORDLIST.txt --pot=results.pot pdfs_hash.hash
+john --show --format=PDF --pot=results.pot pdfs_hash.hash
+```
+
+`--format` selects the PDF format; `--wordlist` selects password candidates; `--pot` stores recovered results; `--show` displays stored results. Password values are masked in both screenshot result lists.
+
+
+## A.9 Original PDF Metadata — ExifTool
+
+```bash
+exiftool -password 'PDF_PASSWORD' patient_report_3.pdf
+```
+
+Use the original document and its recovered password. A re-exported reading copy may lose operational metadata. No original ExifTool screenshot was supplied; the metadata output was preserved as text.
+
+## A.10 Portal Input and Report Access
+
+Confirmed Username input:
+
+```text
+admin' -- -
+```
+
+This is an input value, not a shell command. The input screenshot alone does not prove the successful HTTP response; the separate report-page screenshot supports the trainee's account. Complete original request parameters are unavailable.
+
+
+
+## A.11 Preserve a Backup Response — curl
+
+```bash
+curl -q -sS --max-time 30 \
+  -D backup_headers.txt \
+  -o backup.sql \
+  -w 'HTTP status: %{http_code}\n' \
+  'https://mediroza.example/legacy/backup.sql'
+
+file backup.sql
+head -n 20 backup.sql
+sha256sum backup.sql
+```
+
+`-q` disables personal curl configuration; `-D` preserves response headers; `-o` saves the response body; `-w` displays the status. Check the body: HTTP 200 alone does not prove that the response is a SQL export. The original headers and verification file were supplied, but no original curl screenshot was available.
+
+## A.12 Read the SQL Tables
+
+```sql
+SELECT full_name, job_title, department, monthly_salary_zar
+FROM staff ORDER BY id;
+
+SELECT shareholder_name, share_percent, shares_held, share_class
+FROM shareholders ORDER BY id;
+
+SELECT COUNT(*) AS employee_count, SUM(monthly_salary_zar) AS monthly_total_zar
+FROM staff;
+```
+
+`CREATE TABLE` describes the schema; `INSERT INTO` specifies row values; `SELECT` chooses columns; `COUNT` counts records; `SUM` adds values. These examples run against a local database, not the hospital server.
+
+## A.13 Run the Repository Demonstration
+
+```bash
+python3 scripts/analyze_demo.py --source data/demo.sql --output outputs
+python3 -m unittest discover -s tests -v
+```
+
+These commands run with the bundled synthetic dataset. The output contains 30 fictional employee records and 10 fictional shareholder records, with amounts different from the confidential assessment data.
+
+Individual command files are available in [evidence/commands](evidence/commands). Editing notes and screenshot hashes are recorded in [evidence/manifest.json](evidence/manifest.json).
+
+<a id="synthetic-data"></a>
+
+# Appendix B — Synthetic Data and Local Analysis
+
+`demo.sql` contains 30 entirely fictional employees and 10 fictional shareholder organizations. No real name, individual salary, telephone number, national identifier or secret from the confidential evidence is reused.
+
+- `staff`: ID, synthetic name, demonstration role, department and fictional monthly salary in ZAR.
+- `shareholders`: ID, synthetic organization, percentage, number of shares and demonstration class.
+
+Record 26 contains a SQL-escaped apostrophe. Calculated results describe only this synthetic dataset.
+
+## B.1 Table Structure
+
+| Table | Column | Meaning |
+|---|---|---|
+| `staff` | `id` | Unique demonstration employee identifier |
+| `staff` | `full_name` | Entirely synthetic employee name |
+| `staff` | `job_title` | Demonstration role |
+| `staff` | `department` | Synthetic department assignment |
+| `staff` | `monthly_salary_zar` | Fictional monthly salary in South African rand |
+| `shareholders` | `id` | Unique demonstration shareholder identifier |
+| `shareholders` | `shareholder_name` | Entirely synthetic organization name |
+| `shareholders` | `share_percent` | Demonstration ownership percentage |
+| `shareholders` | `shares_held` | Demonstration share count |
+| `shareholders` | `share_class` | Demonstration share classification |
+
+A SQL string escapes an apostrophe by doubling it:
+
+```sql
+'Example Employee''s Record 026'
+```
+
+The resulting text value is `Example Employee's Record 026`. The tests also cover a semicolon inside a quoted string so that it is not mistaken for the end of an INSERT statement.
+
+## B.2 Run the Demonstration
+
+From the repository root, using Python 3:
+
+```bash
+python3 scripts/analyze_demo.py --source data/demo.sql --output outputs
+python3 -m unittest discover -s tests -v
+```
+
+The analysis uses only the Python standard library and an in-memory SQLite database. It imports the demonstration INSERT records and leaves the source unchanged. It does not connect to the hospital database or execute the dump's CREATE, DROP, LOCK or SET instructions.
+
+## B.3 Output Files
+
+| Output | Contents |
+|---|---|
+| `outputs/employee_salaries_demo.csv` | All synthetic employee rows |
+| `outputs/shareholders_demo.csv` | All synthetic shareholder rows |
+| `outputs/demo_summary.json` | Counts, totals, ownership check and source SHA-256 |
+
+CSV files use UTF-8 and a semicolon delimiter. The output folder is ignored by Git.
+
+## B.4 Expected Synthetic Results
+
+```json
+{
+  "employee_count": 30,
+  "shareholder_count": 10,
+  "total_monthly_payroll_zar": 1215000,
+  "total_shareholding_percent": "100",
+  "total_shares": 10000,
+  "shareholding_equals_100_percent": true
+}
+```
+
+These amounts describe only the fictional repository dataset. They are not the confidential payroll or share counts from the original assessment.
+
+The two functional tests check complete extraction, correct totals, source preservation, and quoted apostrophes and semicolons.
+
+<a id="publishing"></a>
+
+# Appendix C — Repository Layout and Publishing
+
+## C.1 Repository Layout
+
+`README.md` is the repository's only Markdown document. It contains the report, command reference, screenshot notes, dataset documentation, author information and publishing instructions.
+
+```text
+github_mediroza/
+├── README.md
+├── .gitignore
+├── docs/
+│   ├── Public_Report_Mardochee_BONOU_B084.pdf
+│   └── Public_Report_Mardochee_BONOU_B084.docx
+├── evidence/
+│   ├── manifest.json
+│   ├── screenshots/             # Nine redacted original images
+│   └── commands/                # Standalone command text and SQL files
+├── data/demo.sql                # Entirely synthetic records
+├── scripts/analyze_demo.py
+└── tests/test_analysis.py
+```
+
+The PDF and DOCX remain formatted report downloads. Screenshots, the evidence manifest, command files, scripts and data remain separate assets referenced from this single document.
+
+## C.2 Review the Local and Remote State
+
+The local branch is `main` and the configured repository is [Mardoch45/INTERSHIP-FINAL-REPORT](https://github.com/Mardoch45/INTERSHIP-FINAL-REPORT). The preparation environment did not upload the files; its GitHub DNS resolution and recorded authentication were unavailable. Existing remote history and the trainee's recent pulled README edits are retained.
+
+```bash
+git status
+git remote -v
+git fetch origin
+git branch -r
+git log --oneline --graph --all
+```
+
+Review the graph before integrating new remote commits. If the local branch can advance without a merge, `git pull --ff-only` preserves that existing history. If the branches have diverged, review and integrate the changes rather than resetting or force-replacing the remote branch.
+
+## C.3 Authentication When Needed
+
+If GitHub CLI authentication needs to be restored:
+
+```bash
+gh auth status
+gh auth login --hostname github.com --git-protocol https --web
+gh auth status
+```
+
+No new login is needed solely to read this document or run the local demonstration.
+
+## C.4 Commit Documentation Changes and Push
+
+For future README edits:
+
+```bash
+git add README.md
+git commit -m "Update the consolidated internship README"
+git push -u origin main
+```
+
+For a consolidation that also removes old Markdown files, `git add -u` records those tracked deletions. If the changes have already been committed locally, only the push is needed. A rejected non-fast-forward push should be resolved by reviewing and integrating the remote history, not by forcing the upload.
+
+The complete confidential report remains in the workspace's `rapport_final/` folder outside this public repository. Local commits use a GitHub noreply author address. Confidential reports, recovered secrets and wordlists are not part of the public dataset.
