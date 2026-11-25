@@ -247,16 +247,7 @@ Input capture; not proof of the successful HTTP response — redacted original V
 
 Three report download controls — redacted original VM screenshot; see evidence manifest.
 
-## 9.10 Reproduce the Data Analysis with Synthetic Records
-
-```text
-python3 scripts/analyze_demo.py --source data/demo.sql --output outputs
-python3 -m unittest discover -s tests -v
-```
-
-The repository contains entirely synthetic SQL, an analysis script and functional tests. Results produced from that dataset are demonstration results and do not reproduce the confidential amounts or identities. See COMMANDS.md for the command reference and evidence/manifest.json for editing notes.
-
-# Author and Project Information
+## 9.10  Author and Project Information
 
 | Field | Detail |
 | --- | --- |
