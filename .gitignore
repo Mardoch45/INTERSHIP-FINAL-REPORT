@@ -30,4 +30,5 @@ rockyou*
 *.pem
 *.key
 .DS_Store
-*.py
+scripts/
+tests/
