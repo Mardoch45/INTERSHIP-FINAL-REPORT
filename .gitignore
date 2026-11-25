@@ -30,3 +30,4 @@ rockyou*
 *.pem
 *.key
 .DS_Store
+*.py
