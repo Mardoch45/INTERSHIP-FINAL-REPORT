@@ -1,0 +1,98 @@
+[
+  {
+    "id": "E-01",
+    "title": "Domain registration reconnaissance",
+    "file": "evidence/screenshots/whois_redacted.png",
+    "related": "Reconnaissance",
+    "kind": "Existing redacted screenshot",
+    "display_crop_right_pixels": 0
+  },
+  {
+    "id": "E-02",
+    "title": "Web technology identification",
+    "file": "evidence/screenshots/whatweb_redacted.png",
+    "related": "Reconnaissance",
+    "kind": "Existing redacted screenshot",
+    "display_crop_right_pixels": 0
+  },
+  {
+    "id": "E-03",
+    "title": "DNS resolution",
+    "file": "evidence/screenshots/nslookup_redacted.png",
+    "related": "Reconnaissance",
+    "kind": "Existing redacted screenshot",
+    "display_crop_right_pixels": 0
+  },
+  {
+    "id": "E-04",
+    "title": "DNS enumeration launch",
+    "file": "evidence/screenshots/dnsrecon_redacted.png",
+    "related": "Reconnaissance",
+    "kind": "Existing redacted screenshot",
+    "display_crop_right_pixels": 419
+  },
+  {
+    "id": "E-05",
+    "title": "Web path enumeration",
+    "file": "evidence/screenshots/gobuster_redacted.png",
+    "related": "F-04",
+    "kind": "Existing redacted screenshot",
+    "display_crop_right_pixels": 0
+  },
+  {
+    "id": "E-06",
+    "title": "Patient portal input",
+    "file": "evidence/screenshots/portal_input_redacted.png",
+    "related": "F-01",
+    "kind": "Existing redacted screenshot",
+    "display_crop_right_pixels": 0
+  },
+  {
+    "id": "E-07",
+    "title": "Patient report download controls",
+    "file": "evidence/screenshots/reports_page_redacted.png",
+    "related": "F-01",
+    "kind": "Existing redacted screenshot",
+    "display_crop_right_pixels": 0
+  },
+  {
+    "id": "E-08",
+    "title": "PDF verification-data extraction",
+    "file": "evidence/screenshots/pdf_hash_extraction_redacted.png",
+    "related": "F-02",
+    "kind": "Existing redacted screenshot",
+    "display_crop_right_pixels": 0
+  },
+  {
+    "id": "E-09",
+    "title": "Offline password recovery results",
+    "file": "evidence/screenshots/pdf_password_recovery_redacted.png",
+    "related": "F-02",
+    "kind": "Existing redacted screenshot",
+    "display_crop_right_pixels": 0
+  },
+  {
+    "id": "E-10",
+    "title": "Original-document opening checks",
+    "related": "F-02",
+    "kind": "Restricted original artifact; public narrative summary only"
+  },
+  {
+    "id": "E-11",
+    "title": "Operational metadata in an original PDF",
+    "related": "F-03",
+    "kind": "Restricted original artifact; public narrative summary only"
+  },
+  {
+    "id": "E-12",
+    "title": "Backup response and matching SQL copies",
+    "related": "F-04",
+    "kind": "Restricted original artifact; public narrative summary only"
+  },
+  {
+    "id": "E-13",
+    "title": "Local extraction and consistency checks",
+    "related": "F-04",
+    "kind": "Restricted original artifact; public narrative summary only"
+  }
+]

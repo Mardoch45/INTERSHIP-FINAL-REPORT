@@ -1,0 +1,65 @@
+{
+  "page_count": 18,
+  "no_blank_pages": true,
+  "page_fields_correct": true,
+  "no_replacement_characters": true,
+  "no_accidental_patch_prefixes_in_commands": true,
+  "docx_internal_link_count": 48,
+  "docx_all_internal_links_resolve": true,
+  "native_table_of_contents": true,
+  "docx_pdf_paragraphs_compared": 243,
+  "docx_pdf_text_matches": true,
+  "public_screenshots_unchanged": true,
+  "all_nine_original_public_derivatives_embedded": true,
+  "embedded_image_count": 9,
+  "four_uniform_finding_profiles": true,
+  "finding_severity_and_validation_match_readme": true,
+  "author_period_batch_match_readme": true,
+  "tools_match_readme": true,
+  "text_within_page_bounds": true,
+  "pdf_internal_link_count": 85,
+  "pdf_all_links_target_existing_pages": true,
+  "toc_entry_count": 9,
+  "toc_printed_pages_match_link_targets": true,
+  "toc_targets_match_section_titles": true,
+  "old_pdf_preserved_and_archive_identical": true,
+  "old_docx_preserved_and_archive_identical": true,
+  "readme_alignment": {
+    "finding_ratings": {
+      "F-01": "High (provisional)",
+      "F-02": "High",
+      "F-03": "Low",
+      "F-04": "High"
+    },
+    "overall_risk": "HIGH",
+    "assessment_period": "22–25 November 2026",
+    "author": "Mardochée BONOU",
+    "batch": "B084",
+    "validation": {
+      "F-01": "Partially documented",
+      "F-02": "Verified",
+      "F-03": "Verified",
+      "F-04": "Verified"
+    }
+  },
+  "required_limits_present": true,
+  "visual_review": {
+    "status": "Manual review of this edition is recorded in REPORT_REDESIGN_REVIEW.md; not an automated check",
+    "checks": [
+      "tables",
+      "image framing and legibility",
+      "isolated headings",
+      "blank pages",
+      "pagination",
+      "character rendering",
+      "confidentiality of public screenshots"
+    ]
+  },
+  "passed": true,
+  "failures": [],
+  "artifact_sha256": {
+    "Mediroza_Penetration_Testing_Report_Professional.pdf": "1b66506b5824e5101e415233c9bd0b5c503580d8fc05bb80be3f5228204a63b5",
+    "Mediroza_Penetration_Testing_Report_Professional.docx": "e9c257bcef353bd7dcd18a89fe4f1e76ec93d193e8f6c8f9c273937dd99fddea"
+  },
+  "readme_sha256": "0c32e0dc64760219ae8c0c118f3e06adcb7a29260e7b71e6bf4e0fcb30104f85"
+}

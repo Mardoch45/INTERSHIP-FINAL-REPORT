@@ -1,0 +1,27 @@
+{
+  "original_SQL_reanalysis_record_counts": {
+    "staff": 30,
+    "shareholders": 10
+  },
+  "staff_dates_after_header": 3,
+  "private_values_screened": 134,
+  "private_value_matches_in_new_deliverables": 0,
+  "preexisting_PDFs_and_images_integrity_verified": 53,
+  "modified_originals": 0,
+  "new_live_target_requests": 0,
+  "original_pdf_checks": [
+    {
+      "document": "patient_report_1.pdf",
+      "original_opened_and_text_readable": true
+    },
+    {
+      "document": "patient_report_2.pdf",
+      "original_opened_and_text_readable": true
+    },
+    {
+      "document": "patient_report_3.pdf",
+      "original_opened_and_text_readable": true
+    }
+  ],
+  "original_metadata_contains_operational_backup_comment": true
+}
